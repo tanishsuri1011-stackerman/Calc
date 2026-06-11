@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Calculator</title>
+</head>
+<body>
+    <h1>Simple Calculator</h1>
+
+    <label>First Number:</label>
+    <input type="number" id="num1"><br><br>
+
+    <label>Second Number:</label>
+    <input type="number" id="num2"><br><br>
+
+    <label>Operation:</label>
+    <select id="op">
+        <option value="+">Addition (+)</option>
+        <option value="-">Subtraction (-)</option>
+        <option value="x">Multiplication (×)</option>
+        <option value="/">Division (÷)</option>
+        <option value="^">Exponent (^)</option>
+        <option value="R">Root (R)</option>
+        <option value="F">Factorial (F)</option>
+    </select>
+
+    <button onclick="calculate()">Calculate</button>
+
+    <h2 id="result">Result:</h2>
+
+    <script>
+        function factorial(n) {
+            if (n < 0 || !Number.isInteger(n)) {
+                return "Factorial only works for whole numbers 0 and greater";
+            }
+
+            let result = 1;
+            for (let i = 2; i <= n; i++) {
+                result *= i;
+            }
+            return result;
+        }
+
+        function calculate() {
+            let num1 = parseFloat(document.getElementById("num1").value);
+            let num2 = parseFloat(document.getElementById("num2").value);
+            let op = document.getElementById("op").value;
+            let result;
+
+            switch (op) {
+                case "+":
+                    result = num1 + num2;
+                    break;
+
+                case "-":
+                    result = num1 - num2;
+                    break;
+
+                case "x":
+                    result = num1 * num2;
+                    break;
+
+                case "/":
+                    result = (num2 === 0)
+                        ? "Error: Cannot divide by zero"
+                        : num1 / num2;
+                    break;
+
+                case "^":
+                    result = num1 ** num2;
+                    break;
+
+                case "R":
+                    result = num1 ** (1 / num2);
+                    break;
+
+                case "F":
+                    result = factorial(num1);
+                    break;
+
+                default:
+                    result = "Invalid operation";
+            }
+
+            document.getElementById("result").textContent =
+                "Result: " + result;
+        }
+    </script>
+</body>
+</html>
